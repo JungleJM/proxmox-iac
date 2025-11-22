@@ -28,6 +28,7 @@ pip install --upgrade ansible
 
 echo -e "${GREEN}[6/8] Installing required Python library for Proxmox integration (proxmoxer)...${NC}"
 pip install --upgrade proxmoxer
+pip install --upgrade requests
 
 echo -e "${GREEN}[7/8] Installing/upgrading Proxmox/general Ansible collections...${NC}"
 ansible-galaxy collection install community.general --upgrade

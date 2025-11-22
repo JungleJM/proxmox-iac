@@ -1,7 +1,7 @@
 #!/bin/bash
 
-# This script sets up initial development tools for an apt-based VM (e.g., Ubuntu or Debian).
-# Designed for root execution. Save to GitHub and run: curl -sSfL <script-url> | bash
+# This script sets up initial development tools for a Debian Bookworm VM.
+# Make sure you run as root.
 
 set -e
 
@@ -12,10 +12,10 @@ apt upgrade -y
 echo "Installing dependencies and git..."
 apt install -y apt-transport-https ca-certificates curl gnupg lsb-release git
 
-echo "Adding Docker's official GPG key and repository..."
-curl -fsSL https://download.docker.com/linux/ubuntu/gpg | gpg --dearmor -o /usr/share/keyrings/docker-archive-keyring.gpg
+echo "Adding Docker's official GPG key and Debian repository..."
+curl -fsSL https://download.docker.com/linux/debian/gpg | gpg --dearmor -o /usr/share/keyrings/docker-archive-keyring.gpg
 echo "deb [arch=$(dpkg --print-architecture) signed-by=/usr/share/keyrings/docker-archive-keyring.gpg] \
-https://download.docker.com/linux/ubuntu $(lsb_release -cs) stable" > /etc/apt/sources.list.d/docker.list
+https://download.docker.com/linux/debian bookworm stable" > /etc/apt/sources.list.d/docker.list
 
 echo "Installing Docker and docker-compose..."
 apt update -y

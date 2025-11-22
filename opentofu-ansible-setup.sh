@@ -1,12 +1,12 @@
 #!/bin/bash
-# install-opentofu.sh
-# Installs OpenTofu on Debian/Ubuntu systems
+# install-opentofu-and-ansible.sh
+# Installs OpenTofu and Ansible on Debian/Ubuntu systems
 
 set -e
 
 echo "Updating package list and installing prerequisites..."
 sudo apt-get update
-sudo apt-get install -y apt-transport-https ca-certificates curl gnupg
+sudo apt-get install -y apt-transport-https ca-certificates curl gnupg software-properties-common
 
 echo "Adding OpenTofu GPG keys..."
 sudo install -m 0755 -d /etc/apt/keyrings
@@ -20,11 +20,19 @@ echo \
 deb-src [signed-by=/etc/apt/keyrings/opentofu.gpg,/etc/apt/keyrings/opentofu-repo.gpg] https://packages.opentofu.org/opentofu/tofu/any/ any main" | \
 sudo tee /etc/apt/sources.list.d/opentofu.list > /dev/null
 
-echo "Updating package list and installing OpenTofu..."
+echo "Updating package list..."
 sudo apt-get update
+
+echo "Installing OpenTofu..."
 sudo apt-get install -y tofu
+
+echo "Installing Ansible..."
+sudo apt-get install -y ansible
 
 echo "Checking OpenTofu version..."
 tofu --version
 
-echo "OpenTofu installation complete!"
+echo "Checking Ansible version..."
+ansible --version
+
+echo "OpenTofu and Ansible installation complete!"

@@ -20,9 +20,6 @@ resource "proxmox_vm_qemu" "debian12_clone" {
   clone       = "198"
   vmid        = var.vmid
 
-  # Do NOT autostart
-  autostart   = false
-
   # VM config
   cores       = 2
   memory      = 2048

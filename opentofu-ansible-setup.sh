@@ -8,6 +8,10 @@ echo "Updating package list and installing prerequisites..."
 sudo apt-get update
 sudo apt-get install -y apt-transport-https ca-certificates curl gnupg software-properties-common
 
+echo "clearing old cache of OpenTofu GPG keys"
+sudo rm -f /etc/apt/keyrings/opentofu.gpg
+sudo rm -f /etc/apt/keyrings/opentofu-repo.gpg
+
 echo "Adding OpenTofu GPG keys..."
 sudo install -m 0755 -d /etc/apt/keyrings
 curl -fsSL https://get.opentofu.org/opentofu.gpg | sudo tee /etc/apt/keyrings/opentofu.gpg >/dev/null

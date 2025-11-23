@@ -2,6 +2,8 @@
 
 # This script sets up initial development tools for a Debian Bookworm VM.
 # Make sure you run as root.
+# Command to run: 
+# curl 
 
 set -e
 

@@ -14,16 +14,6 @@ provider "proxmox" {
   pm_tls_insecure = true
 }
 
-variable "pm_password" {
-  description = "Proxmox root password"
-  sensitive = true
-}
-
-variable "vmid" {
-  description = "VMID for the new clone"
-  type        = number
-}
-
 resource "proxmox_vm_qemu" "debian12_clone" {
   name        = "debian12-vm-${var.vmid}"
   target_node = "pve" # Adjust if needed

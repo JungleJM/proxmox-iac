@@ -3,7 +3,7 @@
 # This script sets up initial development tools for a Debian Bookworm VM.
 # Make sure you run as root.
 # Command to run: 
-# curl 
+# curl https://raw.githubusercontent.com/JungleJM/proxmox-iac/refs/heads/main/inst-docker-podman-git.sh | bash
 
 set -e
 

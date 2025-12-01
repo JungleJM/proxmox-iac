@@ -38,3 +38,18 @@ echo "Installing Podman and podman-compose..."
 apt install -y podman podman-compose
 
 echo "Setup complete. Docker, Docker Compose, Podman, Podman Compose, and Git are ready to use!"
+
+echo
+read -p "Install Dockge? (y/n) " answer
+case "$answer" in
+    [yY])
+        echo "Installing Dockge..."
+        curl -fsSL https://raw.githubusercontent.com/JungleJM/proxmox-iac/refs/heads/main/inst_dockge.sh | sudo bash
+        ;;
+    [nN])
+        echo "Skipping Dockge install."
+        ;;
+    *)
+        echo "Invalid choice, skipping Dockge."
+        ;;
+esac

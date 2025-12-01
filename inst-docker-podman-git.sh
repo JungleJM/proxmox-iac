@@ -40,16 +40,33 @@ apt install -y podman podman-compose
 echo "Setup complete. Docker, Docker Compose, Podman, Podman Compose, and Git are ready to use!"
 
 echo
-read -p "Install Dockge? (y/n) " answer
-case "$answer" in
-    [yY])
-        echo "Installing Dockge..."
-        curl -fsSL https://raw.githubusercontent.com/JungleJM/proxmox-iac/refs/heads/main/inst_dockge.sh | sudo bash
-        ;;
-    [nN])
-        echo "Skipping Dockge install."
-        ;;
-    *)
-        echo "Invalid choice, skipping Dockge."
-        ;;
-esac
+timeout=60
+
+while [ "$timeout" -gt 0 ]; do
+    printf "\rInstall Dockge? (y/n) [%02ds left]: " "$timeout"
+    # -t timeout in seconds, -n 1 reads a single character
+    if read -t 1 -n 1 answer; then
+        echo    # move to new line after keypress
+        case "$answer" in
+            [yY])
+                echo "Installing Dockge..."
+                curl -fsSL https://raw.githubusercontent.com/JungleJM/proxmox-iac/refs/heads/main/inst_dockge.sh | sudo bash
+                break
+                ;;
+            [nN])
+                echo "Skipping Dockge install."
+                break
+                ;;
+            *)
+                echo "Invalid choice, please press y or n."
+                ;;
+        esac
+    fi
+    timeout=$((timeout - 1))
+done
+
+if [ "$timeout" -eq 0 ]; then
+    echo    # ensure newline after countdown
+    echo "No input received within 60 seconds. Skipping Dockge install."
+fi
+
